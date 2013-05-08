@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'geminabox-rake'
-  spec.version       = '1.0.0'
+  spec.version       = '1.0.1'
   spec.authors       = ['Jan Graichen']
   spec.email         = %w(jg@altimos.de)
   spec.description   = %q{Geminabox rake task for building and releasing gems.}
@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w(lib)
 
   spec.add_dependency 'bundler', '~> 1.3'
+  spec.add_dependency 'geminabox'
 
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'rake'
