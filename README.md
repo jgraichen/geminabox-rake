@@ -29,7 +29,7 @@ Geminabox::Rake.install
 
 You can also specify gem dir or geminabox server in your Rakefile:
 
-```
+```ruby
 require 'geminabox/rake'
 Geminabox::Rake.install dir: './client', host: 'http://user:password@gems.server.org/'
 ```
@@ -37,7 +37,7 @@ Geminabox::Rake.install dir: './client', host: 'http://user:password@gems.server
 By default all tasks will be scoped under the `geminabox` namespace to avoid accidental pushes to rubygems.org.
 You can define your own namespace:
 
-```
+```ruby
 require 'geminabox/rake'
 Geminabox::Rake.install namespace: 'my'
 ```
