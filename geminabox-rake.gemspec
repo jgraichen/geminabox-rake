@@ -1,11 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'geminabox/rake/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'geminabox-gemhelper'
-  spec.version       = Geminabox::Rake::VERSION
+  spec.version       = '1.0.0'
   spec.authors       = ['Jan Graichen']
   spec.email         = %w(jg@altimos.de)
   spec.description   = %q{Geminabox gemhelper task for building and releasing gems.}

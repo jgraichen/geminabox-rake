@@ -1,4 +1,3 @@
-require 'geminabox/rake/version'
 require 'bundler/gem_helper'
 
 module Geminabox
