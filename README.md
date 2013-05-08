@@ -31,7 +31,15 @@ You can also specify gem dir or geminabox server in your Rakefile:
 
 ```
 require 'geminabox/rake'
-Geminabox::Rake.install dir: './client', host: 'http://user:password@server.org/'
+Geminabox::Rake.install dir: './client', host: 'http://user:password@gems.server.org/'
+```
+
+By default all tasks will be scoped under the `geminabox` namespace to avoid accidental pushes to rubygems.org.
+You can define your own namespace:
+
+```
+require 'geminabox/rake'
+Geminabox::Rake.install namespace: 'my'
 ```
 
 ## Contributing

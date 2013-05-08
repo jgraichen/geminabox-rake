@@ -7,11 +7,19 @@ module Geminabox
       def install_tasks(opts = {})
         new(opts[:dir], opts[:name], opts).install
       end
+      alias_method :install, :install_tasks
     end
 
     def initialize(dir, name, opts = {})
-      @host = opts[:host]
-      super dir, name
+      @host      = opts[:host]
+      @namespace = opts[:namespace]
+      super File.absolute_path(dir), name
+    end
+
+    def install
+      namespace geminabox_task_namespace do
+        super
+      end
     end
 
     protected
@@ -22,6 +30,10 @@ module Geminabox
 
     def geminabox_host_param
       @host ? "--host '#{@host}'" : nil
+    end
+
+    def geminabox_task_namespace
+      @namespace || 'geminabox'
     end
   end
 end

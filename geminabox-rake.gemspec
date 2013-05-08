@@ -3,13 +3,13 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.name          = 'geminabox-gemhelper'
+  spec.name          = 'geminabox-rake'
   spec.version       = '1.0.0'
   spec.authors       = ['Jan Graichen']
   spec.email         = %w(jg@altimos.de)
-  spec.description   = %q{Geminabox gemhelper task for building and releasing gems.}
-  spec.summary       = %q{Geminabox gemhelper task for building and releasing gems.}
-  spec.homepage      = 'https://github.com/jgraichen/geminabox-gemhelper'
+  spec.description   = %q{Geminabox rake task for building and releasing gems.}
+  spec.summary       = %q{Geminabox rake task for building and releasing gems.}
+  spec.homepage      = 'https://github.com/jgraichen/geminabox-rake'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
