@@ -24,7 +24,7 @@ module Geminabox
 
     protected
     def rubygem_push(path)
-      sh("gem inabox '#{path}' #{geminabox_host_param}")
+      sh("bundle exec gem inabox '#{path}' #{geminabox_host_param}")
       Bundler.ui.confirm "Pushed #{name} #{version} to #{@host ? @host : 'default host'}."
     end
 
