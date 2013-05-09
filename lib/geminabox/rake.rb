@@ -1,3 +1,4 @@
+require 'uri'
 require 'bundler/gem_helper'
 
 module Geminabox
@@ -11,7 +12,7 @@ module Geminabox
     end
 
     def initialize(dir, name, opts = {})
-      @host      = opts[:host]
+      @host      = URI.parse opts[:host]
       @namespace = opts[:namespace]
       super File.absolute_path(dir), name
     end
@@ -25,11 +26,20 @@ module Geminabox
     protected
     def rubygem_push(path)
       sh("bundle exec gem inabox '#{path}' #{geminabox_host_param}")
-      Bundler.ui.confirm "Pushed #{name} #{version} to #{@host ? @host : 'default host'}."
+      Bundler.ui.confirm "Pushed #{name} #{version} to #{geminabox_host_string}."
     end
 
     def geminabox_host_param
       @host ? "--host '#{@host}'" : nil
+    end
+
+    def geminabox_host_string
+      return 'default host' unless @host
+      @host.dup.tap do |uri|
+        uri.user = uri.password = nil
+        uri.user     = '**' if uri.user
+        uri.password = '**' if uri.password
+      end
     end
 
     def geminabox_task_namespace
