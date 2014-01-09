@@ -24,14 +24,14 @@ Instead of requiring bundler's rake tasks in your Rakefile use `geminabox-rake`:
 #require 'bundler/gem_tasks' # Do not require bundler's tasks
 
 require 'geminabox/rake'
-Geminabox::Rake.install
+Geminabox::Rake.install host: 'https://gemhost/'
 ```
 
 You can also specify gem dir or geminabox server in your Rakefile:
 
 ```ruby
 require 'geminabox/rake'
-Geminabox::Rake.install dir: './client', host: 'http://user:password@gems.server.org/'
+Geminabox::Rake.install dir: './client', host: 'https://user:password@gems.server.org/'
 ```
 
 By default all tasks will be scoped under the `geminabox` namespace to avoid accidental pushes to rubygems.org.
@@ -39,7 +39,7 @@ You can define your own namespace:
 
 ```ruby
 require 'geminabox/rake'
-Geminabox::Rake.install namespace: 'my'
+Geminabox::Rake.install namespace: 'my', host: 'https://gemhost/'
 ```
 
 ## Contributing
