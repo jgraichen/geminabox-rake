@@ -34,6 +34,13 @@ require 'geminabox/rake'
 Geminabox::Rake.install dir: './client', host: 'http://user:password@gems.server.org/'
 ```
 
+You could also specify multiple hosts by passing array to host key in options:
+
+```ruby
+require 'geminabox/rake'
+Geminabox::Rake.install dir: './client', host: ['http://user:password@gems.server.org/', 'http://backup.host']
+```
+
 By default all tasks will be scoped under the `geminabox` namespace to avoid accidental pushes to rubygems.org.
 You can define your own namespace:
 

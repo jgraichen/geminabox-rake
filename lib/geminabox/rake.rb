@@ -12,7 +12,9 @@ module Geminabox
     end
 
     def initialize(dir, name, opts = {})
-      @host      = URI.parse opts[:host]
+      @hosts     = (opts[:host].is_a?(Array) ? opts[:host] : [ opts[:host] ]).map do |host|
+        URI.parse(host)
+      end
       @namespace = opts[:namespace]
       super File.absolute_path(dir), name
     end
@@ -24,21 +26,32 @@ module Geminabox
     end
 
     protected
+
     def rubygem_push(path)
-      sh("bundle exec gem inabox '#{path}' #{geminabox_host_param}")
-      Bundler.ui.confirm "Pushed #{name} #{version} to #{geminabox_host_string}."
+      params  = geminabox_host_params
+      strings = geminabox_host_strings
+
+      params.each_with_index do |param, i|
+        sh("bundle exec gem push '#{path}' #{param}")
+        Bundler.ui.confirm "Pushed #{name} #{version} to #{strings[i]}."
+      end
     end
 
-    def geminabox_host_param
-      @host ? "--host '#{@host}'" : nil
+    def geminabox_host_params
+      @hosts.map do |host|
+        host ? "--host '#{host}'" : nil
+      end
     end
 
-    def geminabox_host_string
-      return 'default host' unless @host
-      @host.dup.tap do |uri|
-        uri.user = uri.password = nil
-        uri.user     = '**' if uri.user
-        uri.password = '**' if uri.password
+    def geminabox_host_strings
+      return 'default host' unless @hosts
+
+      @hosts.map do |host|
+        host.dup.tap do |uri|
+          uri.user     = uri.password = nil
+          uri.user     = '**' if uri.user
+          uri.password = '**' if uri.password
+        end
       end
     end
 
