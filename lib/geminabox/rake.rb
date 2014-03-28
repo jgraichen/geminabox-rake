@@ -6,6 +6,7 @@ module Geminabox
 
     class << self
       def install_tasks(opts = {})
+        opts[:dir] ||= File.expand_path File.dirname(__FILE__)
         new(opts[:dir], opts[:name], opts).install
       end
       alias_method :install, :install_tasks
