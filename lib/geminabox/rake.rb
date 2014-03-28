@@ -6,14 +6,14 @@ module Geminabox
 
     class << self
       def install_tasks(opts = {})
-        opts[:dir] ||= caller.find{|c| /Rakefile:/}[/^(.*?)\/Rakefile:/, 1]
+        opts[:dir] ||= Dir.getwd
         new(opts[:dir], opts[:name], opts).install
       end
       alias_method :install, :install_tasks
     end
 
     def initialize(dir, name, opts = {})
-      @hosts     = (opts[:host].is_a?(Array) ? opts[:host] : [ opts[:host] ]).map do |host|
+      @hosts     = Array(opts[:host]).map do |host|
         URI.parse(host)
       end
       @namespace = opts[:namespace]
